@@ -117,7 +117,8 @@ module.exports = function(grunt) {
         ignoreInitial: true
       }));
 
-      watcher.on('all', function(event, filepath) {
+      watcher.on('all', _.debounce(function(event, filepath) {
+
         // Skip events not specified
         if (!_.contains(target.options.event, 'all') && !_.contains(target.options.event, event)) {
           return;
@@ -158,7 +159,7 @@ module.exports = function(grunt) {
 
         // Run the tasks
         taskrun.run();
-      });
+      }, grunt.config([name, 'options', 'debounce']) || 0));
       watcher.on('error', function(err) {
         if (typeof err === 'string') {
           err = new Error(err);

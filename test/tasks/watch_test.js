@@ -172,5 +172,5 @@ exports.watch = {
       test.equal(_s.count(result, 'Waiting...'), 2, 'Should have displayed "Wating..." twice');
       test.done();
     });
-  },
+  }
 };
